@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haswini Parmar — iOS Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F4EF;
+    --surface: #FFFFFF;
+    --surface2: #F0EDE8;
+    --border: rgba(0,0,0,0.08);
+    --border-strong: rgba(0,0,0,0.14);
+    --swift: #FF6B2B;
+    --swift-light: rgba(255,107,43,0.1);
+    --swift-mid: rgba(255,107,43,0.2);
+    --flutter: #0D72B8;
+    --flutter-light: rgba(13,114,184,0.1);
+    --flutter-mid: rgba(13,114,184,0.2);
+    --accent: var(--swift);
+    --accent2: var(--flutter);
+    --accent-glow: var(--swift-light);
+    --text: #1A1A2E;
+    --text-muted: #5A5A72;
+    --text-dim: #9A9AB0;
+    --white: #ffffff;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 64px;
+    background: rgba(247,244,239,0.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--swift); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--swift);
+    color: var(--white) !important;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--flutter) !important; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 80px 5vw 0;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #F7F4EF 0%, #EEF4FB 50%, #FEF0E8 100%);
+  }
+  .hero-glow {
+    position: absolute; top: -150px; right: -80px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,43,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-glow2 {
+    position: absolute; bottom: -80px; left: -80px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(13,114,184,0.1) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1100px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(255,107,43,0.08);
+    border: 1px solid rgba(255,107,43,0.25);
+    color: var(--swift);
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .hero-badge::before { content: '●'; font-size: 0.5rem; color: #22c55e; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+  h1 span { color: var(--swift); }
+  .hero-role {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  .hero-desc {
+    color: var(--text-muted);
+    font-size: 0.975rem;
+    line-height: 1.75;
+    max-width: 480px;
+    margin-bottom: 2rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .btn-primary {
+    background: var(--swift);
+    color: var(--white);
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+    box-shadow: 0 4px 14px rgba(255,107,43,0.3);
+  }
+  .btn-primary:hover { background: #e55a1e; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--border-strong);
+    color: var(--text);
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: border-color 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--swift); transform: translateY(-1px); }
+
+  .hero-socials { display: flex; gap: 0.75rem; margin-bottom: 2.5rem; }
+  .social-link {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    color: var(--text-muted);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .social-link:hover { border-color: var(--swift); color: var(--swift); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255,107,43,0.15); }
+
+  .hero-stats { display: flex; gap: 2.5rem; }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+  }
+  .stat-num span { color: var(--swift); }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* hero phone mockup */
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    position: relative;
+  }
+  .phone-frame {
+    width: 240px; height: 480px;
+    background: #1c1c2e;
+    border-radius: 38px;
+    border: 2px solid rgba(255,255,255,0.15);
+    box-shadow:
+      0 0 0 8px rgba(0,0,0,0.04),
+      0 40px 80px rgba(0,0,0,0.18),
+      inset 0 0 0 1px rgba(255,255,255,0.08);
+    position: relative; overflow: hidden;
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-12px); } }
+  .phone-notch {
+    width: 80px; height: 22px;
+    background: #0d0d1a;
+    border-radius: 0 0 14px 14px;
+    margin: 0 auto;
+    position: relative; z-index: 2;
+  }
+  .phone-screen { padding: 12px 16px; font-size: 0.72rem; }
+  .code-line { margin-bottom: 4px; }
+  .kw { color: #FF6B2B; }
+  .fn { color: #0D72B8; }
+  .str { color: #c3e88d; }
+  .cm { color: #546e7a; }
+  .nm { color: #f78c6c; }
+  .phone-glow {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,43,0.12) 0%, rgba(13,114,184,0.08) 50%, transparent 70%);
+    pointer-events: none; z-index: -1;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 5vw; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--swift);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.75rem;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 1rem;
+    line-height: 1.15;
+  }
+  .section-sub {
+    color: var(--text-muted);
+    font-size: 0.975rem;
+    max-width: 540px;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.975rem; }
+  .highlight-card {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .h-stat-num {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--swift);
+  }
+  .h-stat-num.blue { color: var(--flutter); }
+  .h-stat-label { color: var(--text-muted); font-size: 0.8rem; margin-top: 0.2rem; }
+  .about-extra h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .tag {
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.3rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .tag:hover { border-color: var(--swift); color: var(--swift); background: var(--swift-light); }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--bg); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .skill-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1.75rem;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .skill-card:hover { border-color: var(--swift); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(255,107,43,0.1); }
+  .skill-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--swift-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; margin-bottom: 1rem;
+  }
+  .skill-icon.blue-icon { background: var(--flutter-light); }
+  .skill-card h3 {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+  .skill-list { list-style: none; }
+  .skill-list li {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .skill-list li:last-child { border: none; }
+  .skill-list li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--swift); flex-shrink: 0; }
+  .skill-card.blue-card:hover { border-color: var(--flutter); box-shadow: 0 8px 24px rgba(13,114,184,0.1); }
+  .skill-card.blue-card .skill-list li::before { background: var(--flutter); }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--white); }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 119px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--swift), var(--flutter));
+    opacity: 0.25;
+  }
+  .timeline-item {
+    display: grid; grid-template-columns: 120px 1fr;
+    gap: 2.5rem; margin-bottom: 3rem; position: relative;
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .tl-date { text-align: right; padding-top: 0.2rem; position: relative; }
+  .tl-date::after {
+    content: '';
+    position: absolute; right: -2.65rem; top: 0.55rem;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--swift);
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 3px rgba(255,107,43,0.2);
+  }
+  .tl-date span { font-size: 0.75rem; color: var(--text-dim); font-weight: 500; line-height: 1.4; display: block; }
+  .tl-content {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+  .tl-content:hover { border-color: rgba(255,107,43,0.3); box-shadow: 0 6px 20px rgba(255,107,43,0.07); }
+  .tl-role {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+  .tl-company { font-size: 0.83rem; color: var(--flutter); font-weight: 600; margin-bottom: 0.75rem; }
+  .tl-bullets { list-style: none; }
+  .tl-bullets li {
+    color: var(--text-muted);
+    font-size: 0.845rem;
+    padding: 0.3rem 0;
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .tl-bullets li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--swift);
+    font-size: 0.75rem;
+  }
+
+  /* ── PROJECTS ── */
+  #portfolio { background: var(--bg); }
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .project-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1.75rem;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--swift), var(--flutter));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .project-card:hover { border-color: rgba(255,107,43,0.25); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(255,107,43,0.1); }
+  .project-card:hover::before { opacity: 1; }
+  .project-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--swift-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 1.25rem;
+  }
+  .project-icon.blue { background: var(--flutter-light); }
+  .project-card h3 {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .project-card p { color: var(--text-muted); font-size: 0.82rem; line-height: 1.65; margin-bottom: 1rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .project-tag {
+    background: var(--swift-light);
+    color: var(--swift);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .project-tag.blue { background: var(--flutter-light); color: var(--flutter); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .contact-info h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--text); margin-bottom: 1rem;
+  }
+  .contact-info p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.75; margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    padding: 0.75rem 1rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .contact-link:hover { color: var(--text); border-color: var(--swift); box-shadow: 0 4px 12px rgba(255,107,43,0.1); }
+  .contact-link-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--swift-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0; color: var(--swift);
+    font-weight: 700;
+  }
+
+  /* ── CERTS ── */
+  .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .cert-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-size: 0.8rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .cert-card:hover { border-color: var(--swift); box-shadow: 0 4px 12px rgba(255,107,43,0.1); }
+  .cert-issuer {
+    font-size: 0.7rem;
+    color: var(--flutter);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.4rem;
+  }
+  .cert-name { color: var(--text); font-weight: 500; line-height: 1.4; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 2.5rem 5vw;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: #ffffff;
+  }
+  .footer-logo span { color: var(--swift); }
+  footer p { color: rgba(255,255,255,0.4); font-size: 0.8rem; }
+  footer .social-link {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.5);
+  }
+  footer .social-link:hover { border-color: var(--swift); color: var(--swift); box-shadow: 0 4px 12px rgba(255,107,43,0.2); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-inner, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .skills-grid, .projects-grid { grid-template-columns: 1fr 1fr; }
+    .certs-grid { grid-template-columns: 1fr 1fr; }
+    .timeline::before { display: none; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .tl-date { text-align: left; }
+    .tl-date::after { display: none; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    .skills-grid, .projects-grid, .certs-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+    .highlight-card { grid-template-columns: 1fr; }
+  }
+  .contact-links-full {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    max-width: 800px;
+  }
+  @media (max-width: 600px) { .contact-links-full { grid-template-columns: 1fr; } }
+
+  /* ── ACHIEVEMENTS ── */
+  .achievements-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .achievement-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem;
+    display: flex; gap: 1.25rem; align-items: flex-start;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .achievement-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  }
+  .achievement-card:hover { border-color: rgba(245,158,11,0.35); transform: translateY(-3px); box-shadow: 0 10px 28px rgba(245,158,11,0.12); }
+  .achievement-badge {
+    font-size: 1.8rem; flex-shrink: 0;
+    width: 56px; height: 56px;
+    background: rgba(245,158,11,0.1);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .achievement-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+  .achievement-meta {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #d97706;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.6rem;
+  }
+  .achievement-desc { color: var(--text-muted); font-size: 0.855rem; line-height: 1.7; }
+  @media (max-width: 700px) { .achievements-grid { grid-template-columns: 1fr; } }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">HP<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#portfolio">Projects</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">Open to Opportunities</div>
+      <h1>I'm <span>Haswini</span><br>Parmar</h1>
+      <p class="hero-role">iOS Developer · SwiftUI · UIKit · 7 Years</p>
+      <p class="hero-desc">Crafting high-performance iOS applications that delight users and stand the test of scale. From LA Clippers' staff app to Honda's EV platform — I build experiences that matter.</p>
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn-primary">View My Work</a>
+      </div>
+      <div class="hero-socials">
+        <a href="https://www.linkedin.com/in/haswiniparmar/" target="_blank" class="social-link" title="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/parmarhaswini" target="_blank" class="social-link" title="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://leetcode.com/u/HaswiniParmar/" target="_blank" class="social-link" title="LeetCode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H19.7a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">7<span>+</span></div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="stat-num">10<span>+</span></div>
+          <div class="stat-label">Apps Shipped</div>
+        </div>
+        <div>
+          <div class="stat-num">55<span>%</span></div>
+          <div class="stat-label">Memory Reduction</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="phone-glow"></div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="code-line"><span class="cm">// LAClippers StaffApp</span></div>
+          <div class="code-line"><span class="kw">import</span> SwiftUI</div>
+          <div class="code-line"><span class="kw">import</span> Combine</div>
+          <br>
+          <div class="code-line"><span class="kw">struct</span> <span class="fn">StaffView</span>: View {</div>
+          <div class="code-line">&nbsp;&nbsp;<span class="kw">@StateObject var</span></div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;vm = <span class="fn">StaffViewModel</span>()</div>
+          <br>
+          <div class="code-line">&nbsp;&nbsp;<span class="kw">var</span> body: some View {</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">NavigationStack</span> {</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">StaffDashboard</span>()</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<span class="fn">task</span> {</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">await</span> vm.<span class="fn">load</span>()</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+          <div class="code-line">&nbsp;&nbsp;}</div>
+          <div class="code-line">}</div>
+          <br>
+          <div class="code-line"><span class="cm">// Coverage: 30%</span></div>
+          <div class="code-line"><span class="cm">// Arch: VIPER</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-eyebrow">About Me</p>
+        <h2>Building iOS<br>for 7 Years</h2>
+        <p>I'm a passionate iOS developer based in Pune, Maharashtra, with 7 years of experience shaping innovative mobile solutions across industries. I've worked across teams at Globant, IBM, and Infosys — contributing to everything from EV charging platforms to sports staff applications.</p>
+        <p>My work spans SwiftUI, UIKit, Combine, and architectural patterns like VIPER, MVVM, and MVC. I've also worked cross-platform with Xamarin.iOS (1.5 years) and Flutter (1.5 years).</p>
+        <p>I bring both the technical depth to architect clean, testable code and the team-lead experience to mentor engineers and drive sprint delivery.</p>
+        <div class="highlight-card">
+          <div class="h-stat">
+            <div class="h-stat-num">55%</div>
+            <div class="h-stat-label">Memory usage reduced</div>
+          </div>
+          <div class="h-stat">
+            <div class="h-stat-num">40%</div>
+            <div class="h-stat-label">Fewer production bugs</div>
+          </div>
+          <div class="h-stat">
+            <div class="h-stat-num">30%</div>
+            <div class="h-stat-label">Code coverage achieved</div>
+          </div>
+          <div class="h-stat">
+            <div class="h-stat-num">6</div>
+            <div class="h-stat-label">Engineers led</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-extra">
+        <h3>Core Technologies</h3>
+        <div class="tag-cloud">
+          <span class="tag">SwiftUI</span>
+          <span class="tag">UIKit</span>
+          <span class="tag">Swift</span>
+          <span class="tag">Combine</span>
+          <span class="tag">Objective-C</span>
+          <span class="tag">Xamarin.iOS</span>
+          <span class="tag">Flutter</span>
+          <span class="tag">VIPER</span>
+          <span class="tag">MVVM</span>
+          <span class="tag">MVC</span>
+          <span class="tag">XCTest</span>
+          <span class="tag">CoreData</span>
+          <span class="tag">Realm</span>
+          <span class="tag">Firebase</span>
+          <span class="tag">Stripe</span>
+          <span class="tag">MapKit</span>
+          <span class="tag">AVPlayer</span>
+          <span class="tag">NFC</span>
+          <span class="tag">CI/CD</span>
+          <span class="tag">Jira</span>
+        </div>
+        <h3 style="margin-top:1.5rem;">Education</h3>
+        <div class="tl-content" style="margin-top:0.75rem;">
+          <div class="tl-role">Bachelor of Engineering</div>
+          <div class="tl-company">Gujarat Technological University · 2014–2018</div>
+          <ul class="tl-bullets">
+            <li>Computer Science Engineering — 7.18/10 GPA</li>
+            <li>Final year project: "Highway Meal" — Android frontend mobile app</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-eyebrow">Expertise</p>
+    <h2>My Skill Set</h2>
+    <p class="section-sub">Seven years of hands-on iOS development across architectures, frameworks, and team sizes.</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">📱</div>
+        <h3>iOS Development</h3>
+        <ul class="skill-list">
+          <li>SwiftUI & UIKit</li>
+          <li>Combine Framework</li>
+          <li>AutoLayout, XIB, Storyboard</li>
+          <li>WebKit, MapKit, Core Location</li>
+          <li>AVPlayer, NFC, Push Notifications</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🏗</div>
+        <h3>Architecture & Patterns</h3>
+        <ul class="skill-list">
+          <li>VIPER, MVVM, MVC, MVP</li>
+          <li>SOLID Principles</li>
+          <li>Clean Code & Refactoring</li>
+          <li>Design Patterns (Udemy certified)</li>
+          <li>Multithreading (GCD, Async/Await)</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🧪</div>
+        <h3>Testing & Quality</h3>
+        <ul class="skill-list">
+          <li>Unit Testing with XCTest</li>
+          <li>30% code coverage achieved</li>
+          <li>Bug reduction (40% in production)</li>
+          <li>Memory profiling & leaks</li>
+          <li>Accessibility & VoiceOver</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">💾</div>
+        <h3>Data & Storage</h3>
+        <ul class="skill-list">
+          <li>CoreData, SQLite, Realm</li>
+          <li>Keychain, UserDefaults</li>
+          <li>Firebase Realtime DB</li>
+          <li>Offline sync functionality</li>
+          <li>Background task management</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <h3>Analytics & DevOps</h3>
+        <ul class="skill-list">
+          <li>Firebase, Amplitude, Datadog</li>
+          <li>Splunk, Site Catalyst</li>
+          <li>Jenkins, CI/CD pipelines</li>
+          <li>Bitbucket, GitHub, Sourcetree</li>
+          <li>Jira (Scrum & Kanban)</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <h3>Cross-Platform</h3>
+        <ul class="skill-list">
+          <li>Flutter & Dart (1.5 years)</li>
+          <li>Xamarin.iOS (1.5 years)</li>
+          <li>Clean Architecture</li>
+          <li>BLoC state management</li>
+          <li>Localization & Internationalization</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-eyebrow">Career</p>
+    <h2>Professional Journey</h2>
+    <p class="section-sub">A track record of high-impact iOS work across startups, enterprises, and global product teams.</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-date"><span>Apr 2024</span><span>Present</span></div>
+        <div class="tl-content">
+          <div class="tl-role">SSR iOS Developer</div>
+          <div class="tl-company">Globant · Pune, Maharashtra</div>
+          <ul class="tl-bullets">
+            <li>Built features for the LA Clippers Intuit Dome Staff App using SwiftUI, Combine & VIPER</li>
+            <li>Wrote unit test cases for all modules; achieved 30% code coverage</li>
+            <li>Managed version control via Bitbucket and sprint delivery via Jira</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date"><span>Jan 2023</span><span>Apr 2024</span></div>
+        <div class="tl-content">
+          <div class="tl-role">Application Developer</div>
+          <div class="tl-company">IBM · Pune, Maharashtra</div>
+          <ul class="tl-bullets">
+            <li>Delivered SmartCharge (v1G), EV ChargerUX and Enrollment modules for Honda & Acura</li>
+            <li>Developed Bev3 Educational Promotion Card features using Swift, UIKit, and VIPER</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date"><span>Jul 2021</span><span>Jan 2023</span></div>
+        <div class="tl-content">
+          <div class="tl-role">Senior Systems Engineer</div>
+          <div class="tl-company">Infosys Ltd · Bengaluru, Karnataka</div>
+          <ul class="tl-bullets">
+            <li>Built features for Allstate OneApp — Drivewise, Milewise, insurance claims, roadside assistance</li>
+            <li>Monitored production via Datadog, Splunk & Amplitude; resolved incidents using ServiceNow</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date"><span>Oct 2020</span><span>Jun 2021</span></div>
+        <div class="tl-content">
+          <div class="tl-role">Associate Software Developer (iOS Team Lead)</div>
+          <div class="tl-company">Uffizio India Pvt. Ltd · Valsad, Gujarat</div>
+          <ul class="tl-bullets">
+            <li>Led a 6-member iOS team across multiple products with parallel development</li>
+            <li>Reduced memory usage by 55% and cut production bugs by 40% through proactive optimization</li>
+            <li>Gathered requirements, managed sprints in Jira, and ran daily standups</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date"><span>Jul 2020</span><span>Oct 2020</span></div>
+        <div class="tl-content">
+          <div class="tl-role">iOS Developer (Part-Time)</div>
+          <div class="tl-company">Weapplinse Technology · Surat, Gujarat</div>
+          <ul class="tl-bullets">
+            <li>Planned features, divided into sprints, and developed the app single-handedly</li>
+            <li>Applied Agile, SDLC lifecycle, and SOLID principles for clean code delivery</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date"><span>Oct 2018</span><span>Jun 2020</span></div>
+        <div class="tl-content">
+          <div class="tl-role">Associate L1 Mobile App Developer</div>
+          <div class="tl-company">1Rivet India Pvt. Ltd · Valsad, Gujarat</div>
+          <ul class="tl-bullets">
+            <li>Converted client requirements into interactive iOS UIs with a focus on memory management</li>
+            <li>Identified and resolved bugs, optimized and refactored code</li>
+            <li>Collaborated on feature definition, design, and App Store deployments following Agile</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-inner">
+    <p class="section-eyebrow">Projects</p>
+    <h2>Featured Work</h2>
+    <p class="section-sub">Apps that have reached real users — from sports arenas to electric vehicle dashboards.</p>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-icon">🏀</div>
+        <h3>LAClippers — Staff App</h3>
+        <p>Identity & fan information management for Intuit Dome staff. Features: vehicle add, Game Face ID, fan age verification, fan profiles, and NFC tag implementation.</p>
+        <div class="project-tags">
+          <span class="project-tag">SwiftUI</span>
+          <span class="project-tag">Combine</span>
+          <span class="project-tag">VIPER</span>
+          <span class="project-tag">NFC</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">⚡</div>
+        <h3>HondaLink & AcuraLink</h3>
+        <p>EV enrollment optimisation, CPO Registration, Public Charge History, and Bev3 Education Promotion cards for Honda and Acura's connected car platform.</p>
+        <div class="project-tags">
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">UIKit</span>
+          <span class="project-tag">VIPER</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🚗</div>
+        <h3>Allstate OneApp</h3>
+        <p>Drivewise & Milewise modules, paperless billing, roadside assistance, and insurance claim flows. Monitored with Datadog, Splunk, and Amplitude.</p>
+        <div class="project-tags">
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">Datadog</span>
+          <span class="project-tag">Splunk</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🗺</div>
+        <h3>Flitrack</h3>
+        <p>Fleet tracking with playback for trip recordings using AVPlayer & MapKit. New tooltips for Power, Fuel, Driver details, Alerts, and Stoppage summaries.</p>
+        <div class="project-tags">
+          <span class="project-tag">UIKit</span>
+          <span class="project-tag">AVPlayer</span>
+          <span class="project-tag">MapKit</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">📊</div>
+        <h3>Trakzee</h3>
+        <p>Fleet management dashboard with charts for usage & cost distribution, geofence reports, and memory leak fixes for live tracking and monthly data loads.</p>
+        <div class="project-tags">
+          <span class="project-tag">UIKit</span>
+          <span class="project-tag">Charts</span>
+          <span class="project-tag">CoreData</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">📈</div>
+        <h3>Truvelop</h3>
+        <p>Manager dashboard with performance evaluations, team member feedback, appreciation notes, and offline sync for posts & comments using Xamarin.iOS.</p>
+        <div class="project-tags">
+          <span class="project-tag">Xamarin.iOS</span>
+          <span class="project-tag">SQLite</span>
+          <span class="project-tag">PDF Kit</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🎪</div>
+        <h3>Stova.io</h3>
+        <p>Event management platform where I contributed as Senior Developer — building features, writing unit tests, conducting code reviews, and maintaining a CI/CD pipeline using Flutter & Clean Architecture.</p>
+        <div class="project-tags">
+          <span class="project-tag">Flutter</span>
+          <span class="project-tag">Dart</span>
+          <span class="project-tag">BLoC</span>
+          <span class="project-tag">Clean Architecture</span>
+          <span class="project-tag">CI/CD</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🛍️</div>
+        <h3>Ahlan.sa</h3>
+        <p>Saudi Arabia–based retail & loyalty app. Led feature development as Senior Developer, drove code reviews, enforced Clean Architecture standards, and delivered test-covered releases via CI/CD pipeline.</p>
+        <div class="project-tags">
+          <span class="project-tag">Flutter</span>
+          <span class="project-tag">Dart</span>
+          <span class="project-tag">BLoC</span>
+          <span class="project-tag">Clean Architecture</span>
+          <span class="project-tag">CI/CD</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" style="padding-top: 60px;">
+  <div class="section-inner">
+    <p class="section-eyebrow">Recognition</p>
+    <h2>Achievements</h2>
+    <p class="section-sub" style="margin-bottom:2.5rem;">Milestones recognised by peers and leadership for consistent, high-quality delivery.</p>
+    <div class="achievements-grid">
+      <div class="achievement-card">
+        <div class="achievement-badge">🏆</div>
+        <div class="achievement-body">
+          <div class="achievement-title">Pat on the Back Award</div>
+          <div class="achievement-meta">Globant · June 2024</div>
+          <p class="achievement-desc">Recognised for outstanding performance and impactful contributions to the LA Clippers Intuit Dome Staff App project within the first months of joining the team.</p>
+        </div>
+      </div>
+      <div class="achievement-card">
+        <div class="achievement-badge">🏆</div>
+        <div class="achievement-body">
+          <div class="achievement-title">Pat on the Back Award</div>
+          <div class="achievement-meta">Globant · November 2025</div>
+          <p class="achievement-desc">Awarded for sustained excellence in project delivery — consistently raising the bar through clean code, proactive problem-solving, and strong collaboration across the team.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="certs" style="padding-top:0;">
+  <div class="section-inner">
+    <p class="section-eyebrow">Credentials</p>
+    <h2>Certificates</h2>
+    <p class="section-sub" style="margin-bottom:2rem;">Continuous learning across iOS, agile, and mobile platforms.</p>
+    <div class="certs-grid">
+      <div class="cert-card"><div class="cert-issuer">Infosys</div><div class="cert-name">Certified iOS Swift App Developer</div></div>
+      <div class="cert-card"><div class="cert-issuer">Infosys</div><div class="cert-name">Global Agile Developer Certification</div></div>
+      <div class="cert-card"><div class="cert-issuer">Infosys</div><div class="cert-name">Certified Associate Mobile App Developer</div></div>
+      <div class="cert-card"><div class="cert-issuer">Udemy</div><div class="cert-name">SwiftUI Masterclass 2023 – iOS App Development</div></div>
+      <div class="cert-card"><div class="cert-issuer">Udemy</div><div class="cert-name">Design Patterns in Swift</div></div>
+      <div class="cert-card"><div class="cert-issuer">Tops Technology</div><div class="cert-name">iOS Training in Objective-C</div></div>
+      <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">Agile Foundation</div></div>
+      <div class="cert-card"><div class="cert-issuer">IBM L&K</div><div class="cert-name">Flutter · Android · SwiftUI · React Native</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-eyebrow">Get In Touch</p>
+    <h2>Let's Work Together</h2>
+    <p class="section-sub">Open to new iOS opportunities, freelance projects, and collaborations. I'd love to hear about what you're building.</p>
+    <div class="contact-links-full">
+          <a href="mailto:haswiniparmar@outlook.com" class="contact-link">
+            <div class="contact-link-icon">✉️</div>
+            <div>
+              <div style="font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">Email</div>
+              haswiniparmar@outlook.com
+            </div>
+          </a>
+          <a href="tel:7990246069" class="contact-link">
+            <div class="contact-link-icon">📞</div>
+            <div>
+              <div style="font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">Phone</div>
+              +91 79902 46069
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/haswiniparmar/" target="_blank" class="contact-link">
+            <div class="contact-link-icon" style="font-size:1rem;">in</div>
+            <div>
+              <div style="font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">LinkedIn</div>
+              linkedin.com/in/haswiniparmar
+            </div>
+          </a>
+          <a href="https://github.com/parmarhaswini" target="_blank" class="contact-link">
+            <div class="contact-link-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            </div>
+            <div>
+              <div style="font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">GitHub</div>
+              github.com/parmarhaswini
+            </div>
+          </a>
+          <a href="https://leetcode.com/u/HaswiniParmar/" target="_blank" class="contact-link">
+            <div class="contact-link-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H19.7a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
+            </div>
+            <div>
+              <div style="font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">LeetCode</div>
+              leetcode.com/u/HaswiniParmar
+            </div>
+          </a>
+          <a href="#" class="contact-link">
+            <div class="contact-link-icon">📍</div>
+            <div>
+              <div style="font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">Location</div>
+              Pune, Maharashtra, India
+            </div>
+          </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Haswini Parmar<span>.</span></div>
+  <div style="display:flex;gap:0.6rem;">
+    <a href="https://www.linkedin.com/in/haswiniparmar/" target="_blank" class="social-link" title="LinkedIn" style="width:34px;height:34px;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://github.com/parmarhaswini" target="_blank" class="social-link" title="GitHub" style="width:34px;height:34px;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+    </a>
+    <a href="https://leetcode.com/u/HaswiniParmar/" target="_blank" class="social-link" title="LeetCode" style="width:34px;height:34px;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H19.7a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
+    </a>
+  </div>
+  <p>© 2026 Haswini Parmar. All rights reserved</p>
+</footer>
+
+</body>
+</html>
