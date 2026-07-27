@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haswini Parmar — iOS Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF7;
+    --surface: #FFFFFF;
+    --surface2: #F4F1EC;
+    --border: rgba(0,0,0,0.07);
+    --border-strong: rgba(0,0,0,0.13);
+    --swift: #F4501C;
+    --swift-light: rgba(244,80,28,0.09);
+    --swift-mid: rgba(244,80,28,0.18);
+    --flutter: #0870C4;
+    --flutter-light: rgba(8,112,196,0.09);
+    --flutter-mid: rgba(8,112,196,0.18);
+    --gold: #E8A020;
+    --gold-light: rgba(232,160,32,0.1);
+    --text: #111118;
+    --text-muted: #5C5C70;
+    --text-dim: #A0A0B8;
+    --white: #ffffff;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.07), 0 2px 6px rgba(0,0,0,0.04);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.05);
+    --shadow-swift: 0 8px 28px rgba(244,80,28,0.18);
+    --shadow-flutter: 0 8px 28px rgba(8,112,196,0.16);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+  ::selection { background: var(--swift-mid); color: var(--text); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
+    z-index: 100; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1.5rem; height: 52px;
+    width: calc(100% - 40px); max-width: 1000px;
+    background: rgba(255,255,255,0.85); backdrop-filter: blur(20px);
+    border: 1px solid var(--border); border-radius: 100px;
+    box-shadow: var(--shadow-md);
+  }
+  .nav-logo { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text); display: flex; align-items: center; gap: 5px; }
+  .nav-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, var(--swift), var(--flutter)); flex-shrink: 0; }
+  .nav-links { display: flex; gap: 0.1rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.82rem; font-weight: 500; padding: 0.35rem 0.75rem; border-radius: 100px; transition: all 0.2s; }
+  .nav-links a:hover { color: var(--text); background: var(--surface2); }
+  .nav-cta { background: var(--text) !important; color: var(--white) !important; padding: 0.4rem 1.1rem !important; border-radius: 100px !important; font-weight: 600 !important; }
+  .nav-cta:hover { background: var(--swift) !important; transform: scale(1.03) !important; }
+
+  /* HERO */
+  #home { min-height: 100vh; display: flex; align-items: center; padding: 100px 5vw 60px; position: relative; overflow: hidden; background: var(--bg); }
+  .hero-blob-1 { position: absolute; top: -120px; right: -60px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle at 40% 40%, rgba(244,80,28,0.13) 0%, transparent 65%); pointer-events: none; filter: blur(2px); animation: drift 8s ease-in-out infinite; }
+  .hero-blob-2 { position: absolute; bottom: -80px; left: -60px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle at 60% 60%, rgba(8,112,196,0.11) 0%, transparent 65%); pointer-events: none; filter: blur(2px); animation: drift 10s ease-in-out infinite reverse; }
+  .hero-blob-3 { position: absolute; top: 40%; left: 42%; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(232,160,32,0.08) 0%, transparent 70%); pointer-events: none; animation: drift 12s ease-in-out infinite 2s; }
+  @keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(20px,-15px) scale(1.04); } 66% { transform: translate(-10px,20px) scale(0.97); } }
+  .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 400px; gap: 4rem; align-items: center; position: relative; z-index: 1; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--surface); border: 1px solid var(--border-strong); color: var(--text-muted); padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600; margin-bottom: 1.75rem; letter-spacing: 0.04em; text-transform: uppercase; box-shadow: var(--shadow-sm); }
+  .hero-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; animation: gpulse 2s infinite; box-shadow: 0 0 0 3px rgba(34,197,94,0.2); }
+  @keyframes gpulse { 0%,100% { opacity:1; box-shadow: 0 0 0 3px rgba(34,197,94,0.2); } 50% { opacity:0.6; box-shadow: 0 0 0 5px rgba(34,197,94,0.08); } }
+  h1 { font-family: var(--font-display); font-size: clamp(3rem, 5.5vw, 5rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.04em; color: var(--text); margin-bottom: 0.5rem; }
+  .h1-accent { background: linear-gradient(135deg, var(--swift) 0%, #FF9A6C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-role { font-family: var(--font-display); font-size: clamp(0.95rem, 1.8vw, 1.15rem); color: var(--text-muted); font-weight: 500; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+  .role-chip { background: var(--swift-light); color: var(--swift); font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.65rem; border-radius: 100px; letter-spacing: 0.03em; text-transform: uppercase; }
+  .role-chip.blue { background: var(--flutter-light); color: var(--flutter); }
+  .hero-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.8; max-width: 480px; margin-bottom: 2.25rem; }
+  .hero-actions { display: flex; gap: 0.875rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .btn-primary { background: var(--swift); color: var(--white); padding: 0.8rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: var(--shadow-swift); }
+  .btn-primary:hover { background: #d43d12; transform: translateY(-2px); box-shadow: 0 14px 36px rgba(244,80,28,0.28); }
+  .hero-socials { display: flex; gap: 0.6rem; margin-bottom: 2.75rem; align-items: center; }
+  .social-link { width: 38px; height: 38px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border-strong); color: var(--text-muted); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.2s; box-shadow: var(--shadow-sm); }
+  .social-link:hover { border-color: var(--swift); color: var(--swift); transform: translateY(-2px) rotate(-4deg); box-shadow: var(--shadow-swift); }
+  .hero-stats { display: flex; gap: 0; }
+  .stat-item { padding: 0 2rem 0 0; border-right: 1px solid var(--border-strong); margin-right: 2rem; }
+  .stat-item:last-child { border: none; margin: 0; padding: 0; }
+  .stat-num { font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: var(--text); line-height: 1; letter-spacing: -0.03em; }
+  .stat-num .accent { color: var(--swift); }
+  .stat-label { font-size: 0.72rem; color: var(--text-dim); margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 600; }
+
+  /* HERO VISUAL - stacked card */
+  .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; height: 480px; }
+  .hero-card-stack { position: relative; width: 300px; height: 400px; }
+  .hero-card-stack::before { content: ''; position: absolute; top: 22px; left: -18px; width: 100%; height: 100%; background: linear-gradient(135deg, var(--flutter-light), var(--flutter-mid)); border: 1.5px solid rgba(8,112,196,0.2); border-radius: 28px; transform: rotate(-4deg); box-shadow: var(--shadow-flutter); }
+  .hero-card-stack::after { content: ''; position: absolute; top: 10px; left: -7px; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(244,80,28,0.06), rgba(244,80,28,0.12)); border: 1.5px solid rgba(244,80,28,0.18); border-radius: 28px; transform: rotate(-1.5deg); }
+  .hero-card-main { position: relative; z-index: 2; width: 100%; height: 100%; background: #1A1A2E; border-radius: 28px; overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid rgba(255,255,255,0.08); animation: float 5s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .card-header { background: linear-gradient(90deg, var(--swift) 0%, var(--flutter) 100%); padding: 12px 16px; display: flex; align-items: center; gap: 8px; }
+  .card-header-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); }
+  .card-header-title { color: white; font-size: 0.68rem; font-weight: 700; font-family: var(--font-display); letter-spacing: 0.05em; }
+  .card-body { padding: 16px 18px; font-size: 0.66rem; font-family: 'Courier New', monospace; }
+  .code-line { margin-bottom: 5px; line-height: 1.5; }
+  .kw { color: var(--swift); font-weight: 700; }
+  .fn { color: #60ABFF; }
+  .str { color: #A8D8A8; }
+  .cm { color: #4A6670; font-style: italic; }
+  .prop { color: #FFD060; }
+  .card-footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 18px; background: rgba(255,255,255,0.03); border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
+  .card-badge { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 100px; }
+  .card-badge.orange { background: var(--swift-light); color: var(--swift); }
+  .card-badge.blue { background: var(--flutter-light); color: var(--flutter); }
+  .float-chip { position: absolute; z-index: 3; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 12px; padding: 7px 11px; font-size: 0.7rem; font-weight: 700; font-family: var(--font-display); color: var(--text); box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .float-chip-1 { top: 20px; right: -55px; animation: chipFloat 6s ease-in-out infinite; }
+  .float-chip-2 { bottom: 80px; right: -48px; animation: chipFloat 7s ease-in-out infinite 1s; }
+  .float-chip-3 { bottom: 20px; left: -52px; animation: chipFloat 5s ease-in-out infinite 0.5s; }
+  @keyframes chipFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  .chip-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  /* SECTIONS */
+  section { padding: 96px 5vw; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; font-weight: 700; color: var(--swift); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1rem; }
+  .section-label::before { content: ''; display: inline-block; width: 20px; height: 2px; background: var(--swift); border-radius: 2px; }
+  h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.035em; color: var(--text); margin-bottom: 0.875rem; line-height: 1.1; }
+  .section-sub { color: var(--text-muted); font-size: 1rem; max-width: 520px; margin-bottom: 3.5rem; line-height: 1.75; }
+
+  /* ABOUT */
+  #about { background: var(--surface); position: relative; overflow: hidden; }
+  #about::before { content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(244,80,28,0.05), transparent 65%); pointer-events: none; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; position: relative; z-index: 1; }
+  .about-text p { color: var(--text-muted); line-height: 1.85; margin-bottom: 1.1rem; font-size: 0.975rem; }
+  .highlight-card { background: linear-gradient(135deg, var(--bg) 0%, #EDE9E1 100%); border: 1px solid var(--border-strong); border-radius: 20px; padding: 1.75rem; margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; box-shadow: var(--shadow-md); position: relative; overflow: hidden; }
+  .highlight-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--swift), var(--flutter)); }
+  .h-stat { padding: 0.25rem; }
+  .h-stat-num { font-family: var(--font-display); font-size: 2.1rem; font-weight: 700; color: var(--swift); letter-spacing: -0.03em; line-height: 1; }
+  .h-stat-num.blue { color: var(--flutter); }
+  .h-stat-label { color: var(--text-muted); font-size: 0.78rem; margin-top: 0.3rem; font-weight: 500; }
+  .about-extra h3 { font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 2rem; }
+  .tag { background: var(--surface2); border: 1px solid var(--border-strong); color: var(--text-muted); padding: 0.32rem 0.8rem; border-radius: 100px; font-size: 0.76rem; font-weight: 600; transition: all 0.2s; cursor: default; }
+  .tag:hover { border-color: var(--swift); color: var(--swift); background: var(--swift-light); transform: translateY(-1px); }
+
+  /* SKILLS */
+  #skills { background: var(--bg); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .skill-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 1.75rem; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: var(--shadow-sm); position: relative; overflow: hidden; }
+  .skill-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 0; background: linear-gradient(to top, var(--swift-light), transparent); transition: height 0.3s ease; }
+  .skill-card:hover { transform: translateY(-6px) rotate(-0.5deg); box-shadow: var(--shadow-swift); border-color: rgba(244,80,28,0.2); }
+  .skill-card:hover::after { height: 60px; }
+  .skill-card.blue-card:hover { box-shadow: var(--shadow-flutter); border-color: rgba(8,112,196,0.2); }
+  .skill-card.blue-card::after { background: linear-gradient(to top, var(--flutter-light), transparent); }
+  .skill-icon { width: 48px; height: 48px; border-radius: 14px; background: var(--swift-light); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.25rem; position: relative; z-index: 1; }
+  .skill-icon.blue-icon { background: var(--flutter-light); }
+  .skill-card h3 { font-family: var(--font-display); font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; position: relative; z-index: 1; }
+  .skill-list { list-style: none; position: relative; z-index: 1; }
+  .skill-list li { color: var(--text-muted); font-size: 0.8rem; padding: 0.3rem 0; border-bottom: 1px dashed var(--border); display: flex; align-items: center; gap: 0.6rem; }
+  .skill-list li:last-child { border: none; }
+  .skill-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--swift); flex-shrink: 0; transition: transform 0.2s; }
+  .skill-card:hover .skill-list li::before { transform: scale(1.5); }
+  .skill-card.blue-card .skill-list li::before { background: var(--flutter); }
+
+  /* EXPERIENCE */
+  #experience { background: var(--surface); }
+  .timeline { position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 128px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(to bottom, var(--swift) 0%, var(--flutter) 50%, var(--swift) 100%); opacity: 0.2; border-radius: 2px; }
+  .timeline-item { display: grid; grid-template-columns: 130px 1fr; gap: 3rem; margin-bottom: 2.5rem; position: relative; }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .tl-date { text-align: right; padding-top: 1.2rem; position: relative; }
+  .tl-date::after { content: ''; position: absolute; right: -3.22rem; top: 1.5rem; width: 12px; height: 12px; border-radius: 50%; background: var(--swift); border: 3px solid var(--surface); box-shadow: 0 0 0 3px rgba(244,80,28,0.2); transition: all 0.2s; }
+  .timeline-item:hover .tl-date::after { transform: scale(1.3); box-shadow: 0 0 0 4px rgba(244,80,28,0.15), 0 0 20px rgba(244,80,28,0.2); }
+  .tl-date span { font-size: 0.73rem; color: var(--text-dim); font-weight: 600; line-height: 1.5; display: block; }
+  .tl-content { background: var(--bg); border: 1px solid var(--border-strong); border-radius: 20px; padding: 1.75rem 2rem; transition: all 0.25s; box-shadow: var(--shadow-sm); }
+  .tl-content:hover { border-color: rgba(244,80,28,0.25); box-shadow: var(--shadow-md); transform: translateX(4px); }
+  .tl-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
+  .tl-role { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+  .tl-company { font-size: 0.82rem; color: var(--flutter); font-weight: 700; }
+  .tl-tag { font-size: 0.68rem; font-weight: 700; padding: 0.25rem 0.7rem; border-radius: 100px; background: var(--swift-light); color: var(--swift); white-space: nowrap; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.04em; }
+  .tl-bullets { list-style: none; }
+  .tl-bullets li { color: var(--text-muted); font-size: 0.855rem; padding: 0.4rem 0 0.4rem 1.25rem; position: relative; line-height: 1.65; border-bottom: 1px dashed var(--border); }
+  .tl-bullets li:last-child { border: none; padding-bottom: 0; }
+  .tl-bullets li::before { content: "▸"; position: absolute; left: 0; top: 0.4rem; color: var(--swift); font-size: 0.7rem; }
+
+  /* PROJECTS */
+  #portfolio { background: var(--bg); }
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 1.75rem; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; overflow: hidden; box-shadow: var(--shadow-sm); cursor: default; }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--swift), var(--flutter)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+  .project-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: rgba(244,80,28,0.15); }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-icon { width: 52px; height: 52px; border-radius: 14px; background: var(--swift-light); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.25rem; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .project-card:hover .project-icon { transform: scale(1.1) rotate(-8deg); }
+  .project-icon.blue { background: var(--flutter-light); }
+  .project-card h3 { font-family: var(--font-display); font-size: 0.97rem; font-weight: 700; color: var(--text); margin-bottom: 0.6rem; }
+  .project-card p { color: var(--text-muted); font-size: 0.82rem; line-height: 1.7; margin-bottom: 1.1rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .project-tag { background: var(--swift-light); color: var(--swift); font-size: 0.68rem; padding: 0.22rem 0.6rem; border-radius: 100px; font-weight: 700; }
+  .project-tag.blue { background: var(--flutter-light); color: var(--flutter); }
+
+  /* ACHIEVEMENTS */
+  #achievements { background: var(--surface); }
+  .achievements-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .achievement-card { background: linear-gradient(135deg, #FFFDF5 0%, #FFF8E8 100%); border: 1px solid rgba(232,160,32,0.2); border-radius: 20px; padding: 2rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; overflow: hidden; box-shadow: var(--shadow-sm); }
+  .achievement-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), #F5C842); }
+  .achievement-card::after { content: "★"; position: absolute; bottom: -20px; right: -10px; font-size: 6rem; color: rgba(232,160,32,0.06); font-family: var(--font-display); line-height: 1; pointer-events: none; }
+  .achievement-card:hover { transform: translateY(-5px) rotate(0.5deg); border-color: rgba(232,160,32,0.35); box-shadow: 0 14px 40px rgba(232,160,32,0.15); }
+  .achievement-badge { font-size: 1.8rem; flex-shrink: 0; width: 60px; height: 60px; background: var(--gold-light); border: 1.5px solid rgba(232,160,32,0.25); border-radius: 16px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .achievement-card:hover .achievement-badge { transform: rotate(-8deg) scale(1.1); }
+  .achievement-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+  .achievement-meta { font-size: 0.75rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem; }
+  .achievement-meta::before { content: "●"; font-size: 0.4rem; }
+  .achievement-desc { color: var(--text-muted); font-size: 0.845rem; line-height: 1.75; }
+
+  /* CERTS */
+  #certs { background: var(--bg); }
+  .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .cert-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem 1.25rem 1.25rem 1.1rem; transition: all 0.2s; box-shadow: var(--shadow-sm); border-left: 3px solid rgba(244,80,28,0.2); }
+  .cert-card:nth-child(even) { border-left-color: rgba(8,112,196,0.2); }
+  .cert-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-left-color: var(--swift); }
+  .cert-card:nth-child(even):hover { border-left-color: var(--flutter); }
+  .cert-issuer { font-size: 0.68rem; color: var(--swift); font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .cert-card:nth-child(even) .cert-issuer { color: var(--flutter); }
+  .cert-name { color: var(--text); font-weight: 600; line-height: 1.45; font-size: 0.82rem; }
+
+  /* CONTACT */
+  #contact { background: var(--surface); }
+  .contact-links-full { display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; max-width: 760px; }
+  .contact-link { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--text-muted); font-size: 0.875rem; transition: all 0.2s; padding: 0.875rem 1.125rem; background: var(--bg); border: 1px solid var(--border-strong); border-radius: 16px; box-shadow: var(--shadow-sm); }
+  .contact-link:hover { color: var(--text); border-color: var(--swift); box-shadow: var(--shadow-swift); transform: translateY(-2px); }
+  .contact-link-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--swift-light); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: var(--swift); font-weight: 800; transition: transform 0.2s; }
+  .contact-link:hover .contact-link-icon { transform: scale(1.1) rotate(-5deg); }
+
+  /* FOOTER */
+  footer { background: var(--text); padding: 2.5rem 5vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: #ffffff; display: flex; align-items: center; gap: 6px; }
+  .footer-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, var(--swift), var(--flutter)); }
+  footer p { color: rgba(255,255,255,0.35); font-size: 0.78rem; }
+  footer .social-link { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); }
+  footer .social-link:hover { border-color: var(--swift); color: var(--swift); box-shadow: var(--shadow-swift); transform: translateY(-2px) rotate(-4deg); }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    nav { width: calc(100% - 24px); top: 10px; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .skills-grid, .projects-grid { grid-template-columns: 1fr 1fr; }
+    .certs-grid { grid-template-columns: 1fr 1fr; }
+    .achievements-grid { grid-template-columns: 1fr; }
+    .timeline::before { display: none; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .tl-date { text-align: left; }
+    .tl-date::after { display: none; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 640px) {
+    .skills-grid, .projects-grid { grid-template-columns: 1fr; }
+    .certs-grid { grid-template-columns: 1fr 1fr; }
+    .contact-links-full { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+    .highlight-card { grid-template-columns: 1fr; }
+    .stat-item { border: none; padding: 0; margin: 0; }
+    h1 { font-size: 2.6rem; }
+  }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+  /* HERO ENTRANCE */
+  @keyframes heroIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-anim { opacity: 0; animation: heroIn 0.85s cubic-bezier(0.16,1,0.3,1) forwards; }
+  .hero-anim.d1 { animation-delay: 0.05s; }
+  .hero-anim.d2 { animation-delay: 0.16s; }
+  .hero-anim.d3 { animation-delay: 0.27s; }
+  .hero-anim.d4 { animation-delay: 0.38s; }
+  .hero-anim.d5 { animation-delay: 0.49s; }
+  .hero-anim.d6 { animation-delay: 0.6s; }
+  .hero-anim.d7 { animation-delay: 0.71s; }
+
+  /* NAV ON SCROLL */
+  nav { transition: top 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, width 0.3s ease; }
+  nav.scrolled { top: 8px; box-shadow: 0 10px 32px rgba(0,0,0,0.13); background: rgba(255,255,255,0.95); }
+
+  /* HERO BLOB PARALLAX (mouse-driven, layered on existing drift keyframes) */
+  .hero-blob-1, .hero-blob-2, .hero-blob-3 { will-change: transform; transition: transform 0.4s ease-out; }
+  @keyframes drift { 0%,100% { transform: translate(var(--px,0px), var(--py,0px)) scale(1); } 33% { transform: translate(calc(var(--px,0px) + 20px), calc(var(--py,0px) - 15px)) scale(1.04); } 66% { transform: translate(calc(var(--px,0px) - 10px), calc(var(--py,0px) + 20px)) scale(0.97); } }
+
+  /* PROJECT STORE LINKS */
+  .project-links { display: flex; gap: 0.5rem; margin-top: 1.1rem; flex-wrap: wrap; position: relative; z-index: 1; }
+  .store-link { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--surface2); border: 1px solid var(--border-strong); color: var(--text); text-decoration: none; font-size: 0.72rem; font-weight: 700; padding: 0.4rem 0.75rem; border-radius: 100px; transition: all 0.2s; }
+  .store-link:hover { background: var(--text); color: var(--white); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .store-link svg { width: 13px; height: 13px; flex-shrink: 0; }
+  .store-link.disabled { opacity: 0.5; cursor: default; pointer-events: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .hero-anim { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">HP<span class="nav-logo-dot"></span></div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#portfolio">Projects</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-blob-1"></div>
+  <div class="hero-blob-2"></div>
+  <div class="hero-blob-3"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge hero-anim d1"><span class="hero-badge-dot"></span>Open to Opportunities</div>
+      <h1 class="hero-anim d2">I'm <span class="h1-accent">Haswini</span><br>Parmar</h1>
+      <p class="hero-role hero-anim d3"><span class="role-chip">iOS</span> SwiftUI · UIKit · <span class="role-chip blue">Flutter</span> · 7 Years</p>
+      <p class="hero-desc hero-anim d4">Crafting high-performance iOS applications that delight users and stand the test of scale. From LA Clippers' staff app to Honda's EV platform — I build experiences that matter.</p>
+      <div class="hero-actions hero-anim d5">
+        <a href="#portfolio" class="btn-primary">View My Work</a>
+      </div>
+      <div class="hero-socials hero-anim d6">
+        <a href="https://www.linkedin.com/in/haswiniparmar/" target="_blank" class="social-link" title="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/parmarhaswini" target="_blank" class="social-link" title="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://leetcode.com/u/HaswiniParmar/" target="_blank" class="social-link" title="LeetCode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H19.7a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
+        </a>
+      </div>
+      <div class="hero-stats hero-anim d7">
+        <div class="stat-item">
+          <div class="stat-num"><span class="count-target" data-count="7">0</span><span class="accent">+</span></div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num"><span class="count-target" data-count="10">0</span><span class="accent">+</span></div>
+          <div class="stat-label">Apps Shipped</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num"><span class="count-target" data-count="500">0</span><span class="accent">K+</span></div>
+          <div class="stat-label">Users Impacted</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual hero-anim d3">
+      <div class="hero-card-stack">
+        <div class="hero-card-main">
+          <div class="card-header">
+            <div class="card-header-dot"></div>
+            <div class="card-header-dot"></div>
+            <div class="card-header-title">LAClippers · StaffApp.swift</div>
+          </div>
+          <div class="card-body">
+            <div class="code-line"><span class="cm">// SwiftUI · VIPER · Combine</span></div>
+            <div class="code-line"><span class="kw">import</span> SwiftUI</div>
+            <div class="code-line"><span class="kw">import</span> Combine</div>
+            <br>
+            <div class="code-line"><span class="kw">struct</span> <span class="fn">StaffView</span>: View {</div>
+            <div class="code-line">&nbsp;&nbsp;<span class="kw">@StateObject var</span></div>
+            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;vm = <span class="fn">StaffVM</span>()</div>
+            <br>
+            <div class="code-line">&nbsp;&nbsp;<span class="kw">var</span> body: some View {</div>
+            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">NavigationStack</span> {</div>
+            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">Dashboard</span>()</div>
+            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<span class="fn">task</span> { <span class="kw">await</span></div>
+            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vm.<span class="fn">load</span>() }</div>
+            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+            <div class="code-line">&nbsp;&nbsp;}</div>
+            <div class="code-line">}</div>
+          </div>
+          <div class="card-footer">
+            <span class="card-badge orange">Swift · iOS</span>
+            <span class="card-badge blue">Coverage 30%</span>
+          </div>
+        </div>
+        <div class="float-chip float-chip-1"><span class="chip-dot" style="background:var(--swift)"></span>SwiftUI</div>
+        <div class="float-chip float-chip-2"><span class="chip-dot" style="background:var(--flutter)"></span>Flutter</div>
+        <div class="float-chip float-chip-3">🏆 Pat on the Back</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text reveal" data-reveal-group="about">
+        <p class="section-label">About Me</p>
+        <h2>Building iOS<br>for 7 Years</h2>
+        <p>I'm a passionate iOS developer based in Pune, Maharashtra, with 7 years of experience shaping innovative mobile solutions across industries. I've worked across teams at Globant, IBM, and Infosys — contributing to everything from EV charging platforms to sports staff applications.</p>
+        <p>My work spans SwiftUI, UIKit, Combine, and architectural patterns like VIPER, MVVM, and MVC. I've also worked cross-platform with Xamarin.iOS (1.5 years) and Flutter (1.5 years).</p>
+        <p>I bring both the technical depth to architect clean, testable code and the team-lead experience to mentor engineers and drive sprint delivery.</p>
+        <div class="highlight-card">
+          <div class="h-stat">
+            <div class="h-stat-num"><span class="count-target" data-count="55">0</span>%</div>
+            <div class="h-stat-label">Memory usage reduced</div>
+          </div>
+          <div class="h-stat">
+            <div class="h-stat-num"><span class="count-target" data-count="40">0</span>%</div>
+            <div class="h-stat-label">Fewer production bugs</div>
+          </div>
+          <div class="h-stat">
+            <div class="h-stat-num"><span class="count-target" data-count="500">0</span>K<span style="font-size:1rem">+</span></div>
+            <div class="h-stat-label">Users impacted</div>
+          </div>
+          <div class="h-stat">
+            <div class="h-stat-num"><span class="count-target" data-count="6">0</span></div>
+            <div class="h-stat-label">Engineers led</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-extra reveal" data-reveal-group="about">
+        <h3>Core Technologies</h3>
+        <div class="tag-cloud">
+          <span class="tag">SwiftUI</span>
+          <span class="tag">UIKit</span>
+          <span class="tag">Swift</span>
+          <span class="tag">Combine</span>
+          <span class="tag">Objective-C</span>
+          <span class="tag">Xamarin.iOS</span>
+          <span class="tag">Flutter</span>
+          <span class="tag">VIPER</span>
+          <span class="tag">MVVM</span>
+          <span class="tag">MVC</span>
+          <span class="tag">XCTest</span>
+          <span class="tag">CoreData</span>
+          <span class="tag">Realm</span>
+          <span class="tag">Firebase</span>
+          <span class="tag">Stripe</span>
+          <span class="tag">MapKit</span>
+          <span class="tag">AVPlayer</span>
+          <span class="tag">NFC</span>
+          <span class="tag">CI/CD</span>
+          <span class="tag">Jira</span>
+        </div>
+        <h3 style="margin-top:1.5rem;">Education</h3>
+        <div class="tl-content" style="margin-top:0.75rem;">
+          <div class="tl-role">Bachelor of Engineering</div>
+          <div class="tl-company">Gujarat Technological University · 2014–2018</div>
+          <ul class="tl-bullets">
+            <li>Computer Science Engineering — 7.18/10 GPA</li>
+            <li>Final year project: "Highway Meal" — Android frontend mobile app</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label">Expertise</p>
+    <h2>My Skill Set</h2>
+    <p class="section-sub">Seven years of hands-on iOS development across architectures, frameworks, and team sizes.</p>
+    <div class="skills-grid">
+      <div class="skill-card reveal" data-reveal-group="skills">
+        <div class="skill-icon">📱</div>
+        <h3>iOS Development</h3>
+        <ul class="skill-list">
+          <li>SwiftUI & UIKit</li>
+          <li>Combine Framework</li>
+          <li>AutoLayout, XIB, Storyboard</li>
+          <li>WebKit, MapKit, Core Location</li>
+          <li>AVPlayer, NFC, Push Notifications</li>
+        </ul>
+      </div>
+      <div class="skill-card reveal" data-reveal-group="skills">
+        <div class="skill-icon">🏗</div>
+        <h3>Architecture & Patterns</h3>
+        <ul class="skill-list">
+          <li>VIPER, MVVM, MVC, MVP</li>
+          <li>SOLID Principles</li>
+          <li>Clean Code & Refactoring</li>
+          <li>Design Patterns (Udemy certified)</li>
+          <li>Multithreading (GCD, Async/Await)</li>
+        </ul>
+      </div>
+      <div class="skill-card reveal" data-reveal-group="skills">
+        <div class="skill-icon">🧪</div>
+        <h3>Testing & Quality</h3>
+        <ul class="skill-list">
+          <li>Unit Testing with XCTest</li>
+          <li>30% code coverage achieved</li>
+          <li>Bug reduction (40% in production)</li>
+          <li>Memory profiling & leaks</li>
+          <li>Accessibility & VoiceOver</li>
+        </ul>
+      </div>
+      <div class="skill-card reveal" data-reveal-group="skills">
+        <div class="skill-icon">💾</div>
+        <h3>Data & Storage</h3>
+        <ul class="skill-list">
+          <li>CoreData, SQLite, Realm</li>
+          <li>Keychain, UserDefaults</li>
+          <li>Firebase Realtime DB</li>
+          <li>Offline sync functionality</li>
+          <li>Background task management</li>
+        </ul>
+      </div>
+      <div class="skill-card reveal" data-reveal-group="skills">
+        <div class="skill-icon">📊</div>
+        <h3>Analytics & DevOps</h3>
+        <ul class="skill-list">
+          <li>Firebase, Amplitude, Datadog</li>
+          <li>Splunk, Site Catalyst</li>
+          <li>Jenkins, CI/CD pipelines</li>
+          <li>Bitbucket, GitHub, Sourcetree</li>
+          <li>Jira (Scrum & Kanban)</li>
+        </ul>
+      </div>
+      <div class="skill-card reveal" data-reveal-group="skills">
+        <div class="skill-icon">🌐</div>
+        <h3>Cross-Platform</h3>
+        <ul class="skill-list">
+          <li>Flutter & Dart (1.5 years)</li>
+          <li>Xamarin.iOS (1.5 years)</li>
+          <li>Clean Architecture</li>
+          <li>BLoC state management</li>
+          <li>Localization & Internationalization</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label">Career</p>
+    <h2>Professional Journey</h2>
+    <p class="section-sub">A track record of high-impact iOS work across startups, enterprises, and global product teams.</p>
+    <div class="timeline">
+      <div class="timeline-item reveal" data-reveal-group="timeline">
+        <div class="tl-date"><span>Apr 2024</span><span>Present&nbsp;&nbsp;</span></div>
+        <div class="tl-content">
+          <div class="tl-header"><div><div class="tl-role">SSR iOS Developer</div><div class="tl-company">Globant · Pune, Maharashtra</div></div><span class="tl-tag">2024–Present</span></div>
+          <ul class="tl-bullets">
+            <li>Architected feature modules for the LA Clippers Intuit Dome Staff App using SwiftUI, Combine & Clean Architecture, enabling faster feature delivery and reducing cross-team integration issues</li>
+            <li>Increased unit test coverage to ~30% by writing comprehensive XCTest suites across all modules, reducing regression defects and improving release confidence</li>
+            <li>Optimised SwiftUI rendering and eliminated unnecessary view recompositions, improving scroll performance and UI responsiveness across the app</li>
+            <li>Extended impact to cross-platform by contributing Flutter features for Stova.io and Ahlan.sa, enabling shared logic across iOS and Android with ~40% less duplicated code</li>
+            <li>Reduced technical debt by leading refactoring initiatives and enforcing clean Git workflows, resulting in a more maintainable and consistent codebase</li>
+            <li>Won Pat on the Back Award twice (Jun 2024 & Nov 2025) for adopting new technologies, delivering modules ahead of schedule, and maintaining near-zero bug rates</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item reveal" data-reveal-group="timeline">
+        <div class="tl-date"><span>Jan 2023</span><span>Apr 2024&nbsp;&nbsp;</span></div>
+        <div class="tl-content">
+          <div class="tl-header"><div><div class="tl-role">Application Developer</div><div class="tl-company">IBM · Pune, Maharashtra</div></div><span class="tl-tag">2023–2024</span></div>
+          <ul class="tl-bullets">
+            <li>Delivered Smart Charge (V1G), EV ChargerUX, CPO Registration, and Bev3 Promotion Card modules for Honda & Acura using Swift, UIKit & VIPER, serving ~2M+ connected vehicle users across North America</li>
+            <li>Redesigned Enrollment and Charger UX flows by collaborating directly with product and design teams, simplifying multi-step user journeys and improving feature adoption</li>
+            <li>Integrated CI/CD pipelines via Jenkins by automating build and test stages, reducing manual deployment effort and cutting release cycle time</li>
+            <li>Strengthened app stability by writing unit and integration tests across new modules, catching critical bugs before production and improving overall code quality</li>
+          </ul>
+        </div> 
+      </div>
+      <div class="timeline-item reveal" data-reveal-group="timeline">
+        <div class="tl-date"><span>Jul 2021</span><span>Jan 2023&nbsp;&nbsp;</span></div>
+        <div class="tl-content">
+          <div class="tl-header"><div><div class="tl-role">Senior Systems Engineer</div><div class="tl-company">Infosys Ltd · Bengaluru, Karnataka</div></div><span class="tl-tag">2021–2023</span></div>
+          <ul class="tl-bullets">
+            <li>Built and maintained Drivewise, Milewise, insurance claims, and roadside assistance modules for Allstate OneApp by implementing feature flags and modular architecture, serving ~16M+ Allstate policyholders across the US</li>
+            <li>Reduced production incident response time by proactively monitoring app health via Datadog, Splunk & Amplitude, and resolving critical issues through ServiceNow before they escalated</li>
+            <li>Hardened app security by implementing SSL pinning and secure API integrations, eliminating a class of network-layer vulnerabilities across all API calls</li>
+            <li>Improved release velocity by contributing to CI/CD pipeline improvements, enabling faster and more reliable deployments with fewer rollbacks</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item reveal" data-reveal-group="timeline">
+        <div class="tl-date"><span>Oct 2020</span><span>Jun 2021&nbsp;&nbsp;</span></div>
+        <div class="tl-content">
+          <div class="tl-header"><div><div class="tl-role">Associate Developer · iOS Team Lead</div><div class="tl-company">Uffizio India Pvt. Ltd · Valsad, Gujarat</div></div><span class="tl-tag">2020–2021</span></div>
+          <ul class="tl-bullets">
+            <li>Led a 6-member iOS team across 4 concurrent B2B fleet management products (Trakzee, Flitrack, Startup, Trakzee Local) by coordinating parallel sprints in Jira and running daily standups, enabling on-time delivery across all product lines</li>
+            <li>Eliminated critical memory leaks in live tracking and dashboard modules by profiling with Instruments and removing redundant data layers, reducing memory usage by 55% and improving app stability for enterprise clients managing 1,000+ vehicles</li>
+            <li>Drove a 40% reduction in production bugs by introducing proactive testing practices and code review standards before each sprint release, increasing client trust and retention</li>
+            <li>Managed App Store releases and white-label deployments for multiple B2B clients, ensuring smooth rollouts with zero downtime across fleet management portals</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item reveal" data-reveal-group="timeline">
+        <div class="tl-date"><span>Jul 2020</span><span>Oct 2020&nbsp;&nbsp;</span></div>
+        <div class="tl-content">
+          <div class="tl-header"><div><div class="tl-role">iOS Developer (Part-Time)</div><div class="tl-company">Weapplinse Technology · Surat, Gujarat</div></div><span class="tl-tag">2020</span></div>
+          <ul class="tl-bullets">
+            <li>Owned the full product lifecycle solo — from requirements and sprint planning to UI development and App Store release — delivering a production-ready app within the engagement timeline</li>
+            <li>Built a modular UIKit interface using Auto Layout, TableView, CollectionView & WebKit, producing a responsive and maintainable codebase that scaled across multiple screen sizes</li>
+            <li>Integrated Firebase Auth (Google, Facebook, Twitter), Realtime Database & Analytics by leveraging the SDK, enabling social login and real-time user engagement tracking from day one</li>
+            <li>Ensured offline reliability by implementing CoreData persistence and async background tasks via GCD, keeping the app functional in low-connectivity environments</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item reveal" data-reveal-group="timeline">
+        <div class="tl-date"><span>Oct 2018</span><span>Jun 2020&nbsp;&nbsp;</span></div>
+        <div class="tl-content">
+          <div class="tl-header"><div><div class="tl-role">Associate L1 Mobile App Developer</div><div class="tl-company">1Rivet India Pvt. Ltd · Valsad, Gujarat</div></div><span class="tl-tag">2018–2020</span></div>
+          <ul class="tl-bullets">
+            <li>Translated client requirements into polished iOS UIs by focusing on memory management and Apple HIG guidelines, resulting in App Store approvals with no rejection cycles</li>
+            <li>Identified and resolved critical bugs through systematic root cause analysis and code refactoring, reducing crash rates and improving app stability for end users</li>
+            <li>Collaborated across design and backend teams following Agile ceremonies to deliver features on schedule and deploy successfully to the App Store</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-inner">
+    <p class="section-label">Projects</p>
+    <h2>Featured Work</h2>
+    <p class="section-sub">Apps that have reached real users — from sports arenas to electric vehicle dashboards.</p>
+    <div class="projects-grid">
+      <div class="project-card reveal" data-reveal-group="projects">
+        <div class="project-icon">🏀</div>
+        <h3>LAClippers — Staff App</h3>
+        <p>Identity & fan information management for Intuit Dome staff. Features: vehicle add, Game Face ID, fan age verification, fan profiles, and NFC tag implementation.</p>
+        <div class="project-tags">
+          <span class="project-tag">SwiftUI</span>
+          <span class="project-tag">Combine</span>
+          <span class="project-tag">VIPER</span>
+          <span class="project-tag">NFC</span>
+        </div>
+        <div class="project-links">
+          <a href="https://apps.apple.com/in/app/la-clippers-intuit-dome/id6476565235" target="_blank" rel="noopener" class="store-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.94.06 1.67-.63 3.16-.66 1.53-.03 2.68.6 3.42 1.71-3.14 1.86-2.5 5.95.43 7.09-.63 1.63-1.42 3.26-2.09 4.03zM12.03 7.25c-.15-2.22 1.66-4.06 3.71-4.25.28 2.55-2.06 4.43-3.71 4.25z"/></svg>LA Clippers + Intuit Dome</a>
+        </div>
+      </div>
+      <div class="project-card reveal" data-reveal-group="projects">
+        <div class="project-icon">⚡</div>
+        <h3>HondaLink & AcuraLink</h3>
+        <p>EV enrollment optimisation, CPO Registration, Public Charge History, and Bev3 Education Promotion cards for Honda and Acura's connected car platform.</p>
+        <div class="project-tags">
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">UIKit</span>
+          <span class="project-tag">VIPER</span>
+        </div>
+        <div class="project-links">
+          <a href="https://apps.apple.com/us/app/hondalink/id750465030" target="_blank" rel="noopener" class="store-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.94.06 1.67-.63 3.16-.66 1.53-.03 2.68.6 3.42 1.71-3.14 1.86-2.5 5.95.43 7.09-.63 1.63-1.42 3.26-2.09 4.03zM12.03 7.25c-.15-2.22 1.66-4.06 3.71-4.25.28 2.55-2.06 4.43-3.71 4.25z"/></svg>HondaLink</a>
+          <a href="https://apps.apple.com/us/app/acuralink/id610964308" target="_blank" rel="noopener" class="store-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.94.06 1.67-.63 3.16-.66 1.53-.03 2.68.6 3.42 1.71-3.14 1.86-2.5 5.95.43 7.09-.63 1.63-1.42 3.26-2.09 4.03zM12.03 7.25c-.15-2.22 1.66-4.06 3.71-4.25.28 2.55-2.06 4.43-3.71 4.25z"/></svg>AcuraLink</a>
+        </div>
+      </div>
+      <div class="project-card reveal" data-reveal-group="projects">
+        <div class="project-icon">🚗</div>
+        <h3>Allstate OneApp</h3>
+        <p>Drivewise & Milewise modules, paperless billing, roadside assistance, and insurance claim flows. Monitored with Datadog, Splunk, and Amplitude.</p>
+        <div class="project-tags">
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">Datadog</span>
+          <span class="project-tag">Splunk</span>
+        </div>
+        <div class="project-links">
+          <a href="https://apps.apple.com/us/app/allstate-mobile/id364376344" target="_blank" rel="noopener" class="store-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.94.06 1.67-.63 3.16-.66 1.53-.03 2.68.6 3.42 1.71-3.14 1.86-2.5 5.95.43 7.09-.63 1.63-1.42 3.26-2.09 4.03zM12.03 7.25c-.15-2.22 1.66-4.06 3.71-4.25.28 2.55-2.06 4.43-3.71 4.25z"/></svg>Allstate Mobile</a>
+        </div>
+      </div>
+      <div class="project-card reveal" data-reveal-group="projects">
+        <div class="project-icon">🗺</div>
+        <h3>Flitrack</h3>
+        <p>Fleet tracking with playback for trip recordings using AVPlayer & MapKit. New tooltips for Power, Fuel, Driver details, Alerts, and Stoppage summaries.</p>
+        <div class="project-tags">
+          <span class="project-tag">UIKit</span>
+          <span class="project-tag">AVPlayer</span>
+          <span class="project-tag">MapKit</span>
+        </div>
+        <div class="project-links">
+          <a href="https://apps.apple.com/in/app/flitrack/id986312244" target="_blank" rel="noopener" class="store-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.94.06 1.67-.63 3.16-.66 1.53-.03 2.68.6 3.42 1.71-3.14 1.86-2.5 5.95.43 7.09-.63 1.63-1.42 3.26-2.09 4.03zM12.03 7.25c-.15-2.22 1.66-4.06 3.71-4.25.28 2.55-2.06 4.43-3.71 4.25z"/></svg>Flitrack</a>
+        </div>
+      </div>
+      <div class="project-card reveal" data-reveal-group="projects">
+        <div class="project-icon">📊</div>
+        <h3>Trakzee</h3>
+        <p>Fleet management dashboard with charts for usage & cost distribution, geofence reports, and memory leak fixes for live tracking and monthly data loads.</p>
+        <div class="project-tags">
+          <span class="project-tag">UIKit</span>
+          <span class="project-tag">Charts</span>
+          <span class="project-tag">CoreData</span>
+        </div>
+        <div class="project-links">
+          <a href="https://apps.apple.com/in/app/trakzee/id1396516275" target="_blank" rel="noopener" class="store-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.94.06 1.67-.63 3.16-.66 1.53-.03 2.68.6 3.42 1.71-3.14 1.86-2.5 5.95.43 7.09-.63 1.63-1.42 3.26-2.09 4.03zM12.03 7.25c-.15-2.22 1.66-4.06 3.71-4.25.28 2.55-2.06 4.43-3.71 4.25z"/></svg>Trakzee</a>
+        </div>
+      </div>
+      <div class="project-card reveal" data-reveal-group="projects">
+        <div class="project-icon">📈</div>
+        <h3>Truvelop</h3>
+        <p>Manager dashboard with performance evaluations, team member feedback, appreciation notes, and offline sync for posts & comments using Xamarin.iOS.</p>
+        <div class="project-tags">
+          <span class="project-tag">Xamarin.iOS</span>
+          <span class="project-tag">SQLite</span>
+          <span class="project-tag">PDF Kit</span>
+        </div>
+        <div class="project-links">
+          <a href="https://apps.apple.com/in/app/truvelop/id1401786101" target="_blank" rel="noopener" class="store-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.94.06 1.67-.63 3.16-.66 1.53-.03 2.68.6 3.42 1.71-3.14 1.86-2.5 5.95.43 7.09-.63 1.63-1.42 3.26-2.09 4.03zM12.03 7.25c-.15-2.22 1.66-4.06 3.71-4.25.28 2.55-2.06 4.43-3.71 4.25z"/></svg>Truvelop</a>
+        </div>
+      </div>
+      <div class="project-card reveal" data-reveal-group="projects">
+        <div class="project-icon">🎪</div>
+        <h3>Stova.io</h3>
+        <p>Event management platform where I contributed as Senior Developer — building features, writing unit tests, conducting code reviews, and maintaining a CI/CD pipeline using Flutter & Clean Architecture.</p>
+        <div class="project-tags">
+          <span class="project-tag">Flutter</span>
+          <span class="project-tag">Dart</span>
+          <span class="project-tag">BLoC</span>
+          <span class="project-tag">Clean Architecture</span>
+          <span class="project-tag">CI/CD</span>
+        </div>
+        <div class="project-links">
+          <a href="https://apps.apple.com/in/app/stova-events-app/id6737413852" target="_blank" rel="noopener" class="store-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.94.06 1.67-.63 3.16-.66 1.53-.03 2.68.6 3.42 1.71-3.14 1.86-2.5 5.95.43 7.09-.63 1.63-1.42 3.26-2.09 4.03zM12.03 7.25c-.15-2.22 1.66-4.06 3.71-4.25.28 2.55-2.06 4.43-3.71 4.25z"/></svg>Stova Events</a>
+        </div>
+      </div>
+      <div class="project-card reveal" data-reveal-group="projects">
+        <div class="project-icon">🛍️</div>
+        <h3>Ahlan.sa</h3>
+        <p>Saudi Arabia–based retail & loyalty app. Led feature development as Senior Developer, drove code reviews, enforced Clean Architecture standards, and delivered test-covered releases via CI/CD pipeline.</p>
+        <div class="project-tags">
+          <span class="project-tag">Flutter</span>
+          <span class="project-tag">Dart</span>
+          <span class="project-tag">BLoC</span>
+          <span class="project-tag">Clean Architecture</span>
+          <span class="project-tag">CI/CD</span>
+        </div>
+        <div class="project-links">
+          <a href="https://apps.apple.com/in/app/ahlan-%D8%A3%D9%87%D9%84%D8%A7/id6759857672" target="_blank" rel="noopener" class="store-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.94.06 1.67-.63 3.16-.66 1.53-.03 2.68.6 3.42 1.71-3.14 1.86-2.5 5.95.43 7.09-.63 1.63-1.42 3.26-2.09 4.03zM12.03 7.25c-.15-2.22 1.66-4.06 3.71-4.25.28 2.55-2.06 4.43-3.71 4.25z"/></svg>Ahlan.sa</a>
+        </div>
+      </div>
+      <div class="project-card reveal" data-reveal-group="projects">
+        <div class="project-icon blue">📍</div>
+        <h3>Trakzee Local</h3>
+        <p>Fleet dashboard with charts for usage & cost distribution, plus filterable report screens for activity, geofence, and monthly/weekly/daily/custom-date data, alongside a profile settings screen.</p>
+        <div class="project-tags">
+          <span class="project-tag blue">UIKit</span>
+          <span class="project-tag blue">Charts</span>
+          <span class="project-tag blue">Geofence</span>
+        </div>
+        <div class="project-links">
+          <a href="https://apps.apple.com/in/app/trakzee-local/id1477022936" target="_blank" rel="noopener" class="store-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.94.06 1.67-.63 3.16-.66 1.53-.03 2.68.6 3.42 1.71-3.14 1.86-2.5 5.95.43 7.09-.63 1.63-1.42 3.26-2.09 4.03zM12.03 7.25c-.15-2.22 1.66-4.06 3.71-4.25.28 2.55-2.06 4.43-3.71 4.25z"/></svg>Trakzee Local</a>
+        </div>
+      </div>
+      <div class="project-card reveal" data-reveal-group="projects">
+        <div class="project-icon">🚙</div>
+        <h3>Startup (VTS)</h3>
+        <p>Vehicle tracking product with vehicle summary, trip playback, and detailed summary reporting including travel summaries for fleet operators.</p>
+        <div class="project-tags">
+          <span class="project-tag">UIKit</span>
+          <span class="project-tag">AVPlayer</span>
+          <span class="project-tag">Reports</span>
+        </div>
+        <div class="project-links">
+          <a href="https://apps.apple.com/in/app/startup-vts/id1327365993" target="_blank" rel="noopener" class="store-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.94.06 1.67-.63 3.16-.66 1.53-.03 2.68.6 3.42 1.71-3.14 1.86-2.5 5.95.43 7.09-.63 1.63-1.42 3.26-2.09 4.03zM12.03 7.25c-.15-2.22 1.66-4.06 3.71-4.25.28 2.55-2.06 4.43-3.71 4.25z"/></svg>Startup</a>
+        </div>
+      </div>
+      <div class="project-card reveal" data-reveal-group="projects">
+        <div class="project-icon blue">📼</div>
+        <h3>Trakzee Mini</h3>
+        <p>Lightweight tracking app with trip-recording playback and trip summaries via AVPlayer, PDFKit-based reports stored on-device, Stripe payment integration, and a dedicated trip details screen.</p>
+        <div class="project-tags">
+          <span class="project-tag blue">AVPlayer</span>
+          <span class="project-tag blue">PDFKit</span>
+          <span class="project-tag blue">Stripe</span>
+        </div>
+        <div class="project-links">
+          <a href="https://apps.apple.com/in/app/trakzee-mini/id1524246536" target="_blank" rel="noopener" class="store-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.94.06 1.67-.63 3.16-.66 1.53-.03 2.68.6 3.42 1.71-3.14 1.86-2.5 5.95.43 7.09-.63 1.63-1.42 3.26-2.09 4.03zM12.03 7.25c-.15-2.22 1.66-4.06 3.71-4.25.28 2.55-2.06 4.43-3.71 4.25z"/></svg>Trakzee Mini</a>
+        </div>
+      </div>
+      <div class="project-card reveal" data-reveal-group="projects">
+        <div class="project-icon">📖</div>
+        <h3>I Seek Into Bible</h3>
+        <p>A quiz app featuring different types of questions related to the Bible, built end-to-end including sprint planning and App Store deployment.</p>
+        <div class="project-tags">
+          <span class="project-tag">UIKit</span>
+          <span class="project-tag">Quiz</span>
+          <span class="project-tag">CoreData</span>
+        </div>
+        <div class="project-links">
+          <a href="https://apps.apple.com/in/app/seek-into-bible/id1528147116" target="_blank" rel="noopener" class="store-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.94.06 1.67-.63 3.16-.66 1.53-.03 2.68.6 3.42 1.71-3.14 1.86-2.5 5.95.43 7.09-.63 1.63-1.42 3.26-2.09 4.03zM12.03 7.25c-.15-2.22 1.66-4.06 3.71-4.25.28 2.55-2.06 4.43-3.71 4.25z"/></svg>I Seek Into Bible</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" style="padding-top: 60px;">
+  <div class="section-inner">
+    <p class="section-label">Recognition</p>
+    <h2>Achievements</h2>
+    <p class="section-sub" style="margin-bottom:2.5rem;">Milestones recognised by peers and leadership for consistent, high-quality delivery.</p>
+    <div class="achievements-grid">
+      <div class="achievement-card reveal" data-reveal-group="achievements">
+        <div class="achievement-badge">🏆</div>
+        <div class="achievement-body">
+          <div class="achievement-title">Pat on the Back Award</div>
+          <div class="achievement-meta">Globant · June 2024</div>
+          <p class="achievement-desc">Recognized for successfully delivering key project modules, demonstrating integrity and ownership, fostering strong team collaboration, and contributing to a positive and engaging work environment in LAClippers Staff App.</p>
+        </div>
+      </div>
+      <div class="achievement-card reveal" data-reveal-group="achievements">
+        <div class="achievement-badge">🏆</div>
+        <div class="achievement-body">
+          <div class="achievement-title">Pat on the Back Award</div>
+          <div class="achievement-meta">Globant · November 2025</div>
+          <p class="achievement-desc">Awarded for sustained excellence in project delivery Stova.io — consistently raising the bar through clean code, proactive problem-solving, and strong collaboration across the team. Recognized for quickly learning Flutter, adapting to new Dart technologies, and rapidly gaining a strong understanding of the project. Demonstrated ownership by independently driving assigned tasks, collaborating effectively with cross-functional team members, proactively resolving technical issues, and ensuring timely delivery of key modules. Consistently stepped up to lead discussions and coordinate efforts whenever required, contributing to the team's overall success.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="certs" style="padding-top:0;">
+  <div class="section-inner">
+    <p class="section-label">Credentials</p>
+    <h2>Certificates</h2>
+    <p class="section-sub" style="margin-bottom:2rem;">Continuous learning across iOS, agile, and mobile platforms.</p>
+    <div class="certs-grid">
+      <div class="cert-card reveal" data-reveal-group="certs"><div class="cert-issuer">Infosys</div><div class="cert-name">Certified iOS Swift App Developer</div></div>
+      <div class="cert-card reveal" data-reveal-group="certs"><div class="cert-issuer">Infosys</div><div class="cert-name">Global Agile Developer Certification</div></div>
+      <div class="cert-card reveal" data-reveal-group="certs"><div class="cert-issuer">Infosys</div><div class="cert-name">Certified Associate Mobile App Developer</div></div>
+      <div class="cert-card reveal" data-reveal-group="certs"><div class="cert-issuer">Udemy</div><div class="cert-name">SwiftUI Masterclass 2023 – iOS App Development</div></div>
+      <div class="cert-card reveal" data-reveal-group="certs"><div class="cert-issuer">Udemy</div><div class="cert-name">Design Patterns in Swift</div></div>
+      <div class="cert-card reveal" data-reveal-group="certs"><div class="cert-issuer">Tops Technology</div><div class="cert-name">iOS Training in Objective-C</div></div>
+      <div class="cert-card reveal" data-reveal-group="certs"><div class="cert-issuer">LinkedIn</div><div class="cert-name">Agile Foundation</div></div>
+      <div class="cert-card reveal" data-reveal-group="certs"><div class="cert-issuer">IBM L&K</div><div class="cert-name">Flutter · Android · SwiftUI · React Native</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label">Get In Touch</p>
+    <h2>Let's Work Together</h2>
+    <p class="section-sub">Open to new iOS opportunities, freelance projects, and collaborations. I'd love to hear about what you're building.</p>
+    <div class="contact-links-full">
+          <a href="mailto:haswiniparmar@outlook.com" class="contact-link reveal" data-reveal-group="contact">
+            <div class="contact-link-icon">✉️</div>
+            <div>
+              <div style="font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">Email</div>
+              haswiniparmar@outlook.com
+            </div>
+          </a>
+          <a href="tel:7990246069" class="contact-link reveal" data-reveal-group="contact">
+            <div class="contact-link-icon">📞</div>
+            <div>
+              <div style="font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">Phone</div>
+              +91 79902 46069
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/haswiniparmar/" target="_blank" class="contact-link reveal" data-reveal-group="contact">
+            <div class="contact-link-icon" style="font-size:1rem;">in</div>
+            <div>
+              <div style="font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">LinkedIn</div>
+              linkedin.com/in/haswiniparmar
+            </div>
+          </a>
+          <a href="https://github.com/parmarhaswini" target="_blank" class="contact-link reveal" data-reveal-group="contact">
+            <div class="contact-link-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            </div>
+            <div>
+              <div style="font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">GitHub</div>
+              github.com/parmarhaswini
+            </div>
+          </a>
+          <a href="https://leetcode.com/u/HaswiniParmar/" target="_blank" class="contact-link reveal" data-reveal-group="contact">
+            <div class="contact-link-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H19.7a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
+            </div>
+            <div>
+              <div style="font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">LeetCode</div>
+              leetcode.com/u/HaswiniParmar
+            </div>
+          </a>
+          <a href="#" class="contact-link reveal" data-reveal-group="contact">
+            <div class="contact-link-icon">📍</div>
+            <div>
+              <div style="font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">Location</div>
+              Pune, Maharashtra, India
+            </div>
+          </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Haswini Parmar<span class="footer-logo-dot"></span></div>
+  <div style="display:flex;gap:0.6rem;">
+    <a href="https://www.linkedin.com/in/haswiniparmar/" target="_blank" class="social-link" title="LinkedIn" style="width:34px;height:34px;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://github.com/parmarhaswini" target="_blank" class="social-link" title="GitHub" style="width:34px;height:34px;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+    </a>
+    <a href="https://leetcode.com/u/HaswiniParmar/" target="_blank" class="social-link" title="LeetCode" style="width:34px;height:34px;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H19.7a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
+    </a>
+  </div>
+  <p>© 2026 Haswini Parmar. All rights reserved</p>
+</footer>
+
+<script>
+(function () {
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Nav shrink + shadow on scroll */
+  var nav = document.querySelector('nav');
+  function onNavScroll() {
+    if (!nav) return;
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }
+  window.addEventListener('scroll', onNavScroll, { passive: true });
+  onNavScroll();
+
+  /* Hero blob mouse parallax */
+  var hero = document.getElementById('home');
+  var blobs = document.querySelectorAll('.hero-blob-1, .hero-blob-2, .hero-blob-3');
+  if (hero && blobs.length && !reduceMotion) {
+    hero.addEventListener('mousemove', function (e) {
+      var rect = hero.getBoundingClientRect();
+      var mx = (e.clientX - rect.left - rect.width / 2) / rect.width;
+      var my = (e.clientY - rect.top - rect.height / 2) / rect.height;
+      blobs.forEach(function (b, i) {
+        var strength = (i + 1) * 12;
+        b.style.setProperty('--px', (mx * strength).toFixed(1) + 'px');
+        b.style.setProperty('--py', (my * strength).toFixed(1) + 'px');
+      });
+    });
+    hero.addEventListener('mouseleave', function () {
+      blobs.forEach(function (b) {
+        b.style.setProperty('--px', '0px');
+        b.style.setProperty('--py', '0px');
+      });
+    });
+  }
+
+  /* Scroll-reveal with per-section stagger */
+  var revealEls = document.querySelectorAll('.reveal');
+  var groupCounts = {};
+  revealEls.forEach(function (el) {
+    var g = el.getAttribute('data-reveal-group') || 'default';
+    groupCounts[g] = groupCounts[g] || 0;
+    var idx = groupCounts[g]++;
+    el.style.transitionDelay = Math.min(idx * 70, 420) + 'ms';
+  });
+
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('in-view'); });
+  }
+
+  /* Animated count-up numbers */
+  var counters = document.querySelectorAll('.count-target');
+  function animateCount(el) {
+    var target = parseFloat(el.getAttribute('data-count'));
+    if (isNaN(target)) return;
+    if (reduceMotion) { el.textContent = target; return; }
+    var duration = 1300;
+    var start = null;
+    function tick(ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased);
+      if (p < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        el.textContent = target;
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  if ('IntersectionObserver' in window) {
+    var countObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          countObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(function (el) { countObserver.observe(el); });
+  } else {
+    counters.forEach(function (el) { el.textContent = el.getAttribute('data-count'); });
+  }
+})();
+</script>
+</body>
+</html>
